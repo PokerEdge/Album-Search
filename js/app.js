@@ -17,14 +17,27 @@
 
 		e.preventDefault();
 		
+		//Get the Spotify {id} corresponding to the search string in order to return the album object
 
 		const url = 'https://api.spotify.com/v1/search';
-		let data = $('#search').val();
+		let albumSearch = $('#search').val();
 
+		let data = { //jQuery expects this to be in the format of a JS object
+			q : albumSearch,
+			type : "album"
+			//oauth token : BQDDgZCgTw0hPAiyb4DBOgtui9j_h7NljMqgCbk6cMlAfLz_gzVBwyooBjgqET8GBzqn6NL8uooSGEZG4gmjUvJnIi5lWxTzPi
+		};
 
-		//send GET request to Spotify server to edit query URL with q + search query and query string format
+		//HTML is built to display the albums found that correspond to the user's query
+		function displayAlbums(data){
+
+			$.each(data.items, function(i, albums){
+				console.log();
+			})
+		}
 		
-		//Use $.getJSON to parse the data in JSON format
+		//Use $.getJSON to parse the data in JSON format and send GET request to Spotify server to edit query 
+			//URL with q + search query and query string format
 		
 		//$.getJSON(URL, data, success);
 			// URL: A string containing the URL to which the request is sent.
@@ -32,9 +45,13 @@
 			// Success: The callback function with arguments ( PlainObject data, String textStatus, jqXHR jqXHR )
 
 		$.getJSON(url, data, function(response){
-			// console.log(response); //Getting bad request error
+			console.log(albums.items);
+		}); 
 
-		});
+		//returns jqXHR object
+		// .fail() //Chain error handling methods and HTML here
+
+		// console.log(response);
 
 	});
 
@@ -57,6 +74,19 @@
 
 
 }();
+
+
+// https://developer.spotify.com/web-api/get-album/
+
+
+// https://api.spotify.com/v1/albums
+
+
+// Description	Get an Album [docs]
+// Endpoint	https://api.spotify.com/v1/albums/{id}
+// HTTP Method	GET
+// OAuth	Required
+
 
 // var searchAlbums = function (query) {
 //     $.ajax({
