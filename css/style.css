@@ -107,11 +107,17 @@ button {
 }
 
 /* album LIST COMPONENTS -------- */
+  .album-art {
+    width: 100%;
+    min-height: 100%;
+    -webkit-transition: -webkit-transform .4s ease-out;
+    transition: transform .4s ease-out;
+  }
 
-/*This is a new CSS class missing, though required, from the project files download*/
-.album-art {
-  width: 100%;
-}
+  .album-wrap:hover .album-art {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
 
 .no-albums,
 .desc  {
@@ -227,7 +233,7 @@ button {
   }
 
   .album-wrap {
-    height: 290px;
+    height: 250px;
     border: 1px solid white;
     overflow: hidden;
   }

@@ -14,13 +14,8 @@
 	//When form is submitted execeute an anonymous function
 	$('form').submit(function(e){
 		
-
 		e.preventDefault();
-		
-		//Get the Spotify {id} corresponding to the search string in order to return the album object
-
 		const url = 'https://api.spotify.com/v1/search';
-			//Consider using https://api.spotify.com/v1/albums/{id} and defining the {id} object with other code
 		let albumSearch = $('#search').val();
 
 		let data = { //jQuery expects this to be in the format of a JS object
@@ -29,65 +24,56 @@
 			//oauth token : BQDDgZCgTw0hPAiyb4DBOgtui9j_h7NljMqgCbk6cMlAfLz_gzVBwyooBjgqET8GBzqn6NL8uooSGEZG4gmjUvJnIi5lWxTzPi
 		};
 
+		
+		
 		//HTML is built to display the albums found that correspond to the user's query
 		function displayAlbums(data){
 
-          // <li>
-          //   <div class="album-wrap">
-          //     <img class="album-art" src="https://i.scdn.co/image/23837f31d4791981db85588e57a86cf2ce5b88e3">
-          //   </div>
-          //   	<span class="album-title">Luck of the Draw</span>
-          //   	<span class="album-artist">Bonnie Raitt</span>
-          // </li>
-
-     //      var photoHTML = '<ul>';
-      
-	    //   $.each( data.items, function(i, photo) {
-	    //     photoHTML += '<li class="grid-25 tablet-grid-50">';
-	    //     photoHTML += '<a href="' + photo.link + '" class="image">';
-	    //     photoHTML += '<img src="' + photo.media.m + '"></a></li>';
-	    //   });
-	      
-	    // photoHTML += '</ul>';
-	    // $('#photos').html(photoHTML);
-
 	    	let displayAlbumHTML = '';
 
+		    	$.each(data.albums.items, function(i, item){
+
+		    		//Successful return of object builds HTML for the page for each album object
+		    		displayAlbumHTML += '<li>';
+			    	displayAlbumHTML += '<div class="album-wrap">';
+			    	
+			    	if(item.images[0].url && item.name && item.artists[0].name){	
+			    		
+			    		//Display all album information
+			    		displayAlbumHTML += '<img class="album-art" src="';
+			    		displayAlbumHTML += item.images[0].url + '"';
+
+			    	} else {
+			    		//Display what happens search form returns no album data
+			            displayAlbumHTML += '<li class="no-albums"><i class="material-icons icon-help">help_outline</i>No albums found that match:' + $('#search').val() + '.</li'; //Can the jQuery reference be changed to reference the returned Spotify object?
+				    }
+
+			    	displayAlbumHTML += '>';
+			    	displayAlbumHTML += '</div><span class="album-title">';
+			    	displayAlbumHTML += item.name; 
+			    	displayAlbumHTML += '</span><span class="album-artist">';
+			    	displayAlbumHTML += item.artists[0].name;
+			    	displayAlbumHTML += '</span></li>';
+		    	})
+		    	// .fail() //chain fail styles and conditions based on xhr.statusText
+		    	;
 
 
-	    	for(let i = 0; i < 20; i++){ //Change to $.each() method so that .fail() can be chained to manage errors
 
-		    	// console.log(data.albums.items[i].name); // Album name
-		    	// console.log(data.albums.items[i].images[0].url); //Album image 640px x 640px
-		    	// console.log(data.albums.items[i].artists[0].name); // Artist name
-
-		    	//Make use of template literal here! `template literal ${code part} style`
-		    	displayAlbumHTML += '<li>';
-		    	displayAlbumHTML += '<div class="album-wrap"><img class="album-art" src="'; 
-		    	displayAlbumHTML += data.albums.items[i].images[0].url; 
-		    	displayAlbumHTML += '"></div><span class="album-title">'; 
-		    	displayAlbumHTML += data.albums.items[i].name; 
-		    	displayAlbumHTML += '</span><span class="album-artist">';
-		    	displayAlbumHTML += data.albums.items[i].artists[0].name;
-		    	displayAlbumHTML += '</span>';
-		    	displayAlbumHTML += '</li>';
-
-	    	}
-
-	    	//Instead of using 3 each tags, let's use a single for loop
-
-			// $.each(data.albums.items, function(i, items){
-				
-			// // 	console.log(data.albums.items[i]);
-
-			// // 	// displayAlbumHTML += '<div class="album-wrap"><img class="album-art" src="' + urlToImageForAlbum +'"></div><span class="album-title">' + albumTitleText + '<span class="album-artist">' + albumArtistNameText +'</span>';
+				// <!-- ============================================================
+    //   				2- Display this <li> if the search form returns no album data
+    //      		============================================================ -->
 
 
-			// });
-			
-			// displayAlbumHTML += '</li>';
-			console.log(displayAlbumHTML);
-	      	$('#albums').html(displayAlbumHTML);
+		  //         <li class='no-albums'>
+		  //           <i class='material-icons icon-help'>help_outline</i>No albums found that match: [search form value].
+		  //         </li>
+
+
+
+
+		      	$('#albums').html(displayAlbumHTML);
+
 	    }
 
 			
@@ -105,17 +91,9 @@
 
 		$.getJSON(url, data, displayAlbums); 
 
-		// $.getJSON(url, data, function(response){
-		// 	console.log(response.albums.items[0].name);
-		// }); 
+	}); //End submit event handler
 
-		//returns jqXHR object
-		// .fail() //Chain error handling methods and HTML here
-
-		// console.log(response);
-
-	});
-
+}();
 
 
 
@@ -133,8 +111,6 @@
 					//Display error image
 					//Display error message
 
-
-}();
 
 
 // https://developer.spotify.com/web-api/get-album/
