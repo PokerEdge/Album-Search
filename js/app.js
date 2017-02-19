@@ -1,6 +1,6 @@
 //Search form returns album data in JSON format based on the form submission. Using the API data, dynamically created
 	//HTML displays an album's title, artist, and album art image	
-+function(){
+~function(){
 
 	//AJAX sends GET request to Spotify server for information to get album data based corresponding to search text
 	$('form').submit(function(e){
@@ -15,25 +15,24 @@
 		};
 
 		//HTML is built to display the albums found that correspond to the user's query
-		function displayAlbums(data){
-
+		const displayAlbums = (data) => {
 
 	    	let displayAlbumHTML = '';
-	    	//Change/reset the CSS of the possibly hidden elements to display properly
-
-	    	
-	    	$.each(data.albums.items, function(i, item){
+	    	$.each(data.albums.items, (i, item) => {
 
 	    		//Successful return of object builds HTML for the page for each album object
     			displayAlbumHTML += `
-    				<li>
-    					<div class="album-wrap">
-    						<img class="album-art" src="${item.images[0].url}">
-    					</div>
+    				
+	    			<li>
+	    				<a href="${item.external_urls.spotify}"
+	    					<div class="album-wrap">
+	    						<img class="album-art" src="${item.images[0].url}">
+	    					</div>
+		    				<span class="album-title">${item.name}</span>
+		    				<span class="album-artist">${item.artists[0].name}</span>
+	    				</a>
 
-    					<span class="album-title">${item.name}</span>
-    					<span class="album-artist">${item.artists[0].name}</span>
-    				</li>
+	    			</li>	
     			`		    	
 	    	});  
 
@@ -42,10 +41,11 @@
 
 	    		//Build HTML to show icon describing no albums shown	
 	    		displayAlbumHTML = `
+
 	    			<li class="no-albums desc">
 	    				<i class="material-icons icon-help">
 	    					help_outline
-	    				</i>No albums found that match: ${albumSearch} .
+	    				</i>No albums found that match: ${albumSearch}.
 	    			</li>
 	    		`;
 	    	}
