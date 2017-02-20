@@ -27,61 +27,50 @@
         <i class="material-icons icn-album">album</i>
         Search for your favorite albums!
       </li>
-    <!-- ===============================================================
-      1- Example HTML you'll need to dynamically create with JavaScript.
-         Each result should generate a '<li>'.
-         Make sure you use the exact class names provided.
-         =============================================================== -->
-
-        <!--
-          <li>
-            <div class="album-wrap">
-              <img class="album-art" src="https://i.scdn.co/image/23837f31d4791981db85588e57a86cf2ce5b88e3">
-            </div>
-            <span class="album-title">Luck of the Draw</span>
-            <span class="album-artist">Bonnie Raitt</span>
-          </li>
-        -->
-
-
-    <!-- ============================================================
-      2- Display this <li> if the search form returns no album data
-         ============================================================ -->
-
-        <!--
-          <li class='no-albums'>
-            <i class='material-icons icon-help'>help_outline</i>No albums found that match: [search form value].
-          </li>
-        -->
-
-    <!-- ============================================================
-      3 (extra credit) - Display a new page when an album link is clicked
-         ============================================================ -->
-
-        <!--    
-          Use wrapper for the search page and show() that page on app load
-          Use another wrapper for the album results page that corresponds to the search string album's ID.
-            On click on link, the main page is hidden with hide() and the corresponding album information page is shown with show().
-
-          Use the “albums” endpoint and the album id to get details for an album: GET https://api.spotify.com/v1/albums/{id}
-
-          Load or link to a description page displaying a album's title, year, album art, tracklist, and artist
-            Dynamically insert ID from other AJAX call?
-
-              title: albums.{id}.name
-              year: albums.{id}.release_date OR albums.{id}.release_date_precision
-              album art: albums.{id}.images.url
-              tracklist: albums.{id}.tracks.href
-              artist: albums.{id}.artists.name
-
-          You'll need to write the CSS for this new page
-          See the 'description-page.png' mockup in the 'examples' folder of the project files
-        -->
-
-
-
-
     </ul>
+
+    <!-- ============================================================
+    3 (extra credit) - Display a new page when an album link is clicked
+       ============================================================ -->
+
+      <!--    
+        Use wrapper for the search page and show() that page on app load
+        Use another wrapper for the album results page that corresponds to the search string album's ID.
+          On click on link, the main page is hidden with hide() and the corresponding album information page is shown with show().
+
+        Use the “albums” endpoint and the album id to get details for an album: GET https://api.spotify.com/v1/albums/{id}
+
+        Load or link to a description page displaying a album's title, year, album art, tracklist, and artist
+          Dynamically insert ID from other AJAX call?
+
+            title: albums.{id}.name
+            year: albums.{id}.release_date OR albums.{id}.release_date_precision
+            album art: albums.{id}.images.url
+            tracklist: albums.{id}.tracks.href
+            artist: albums.{id}.artists.name
+
+        You'll need to write the CSS for this new page
+        See the 'description-page.png' mockup in the 'examples' folder of the project files
+      -->
+
+<!--       <ul id="album-detail" class="">
+        <li class = "">
+          <button class ="bread-crumb">< Search Results</button>
+
+          <div class="album-wrap">
+            <img class="album-art" src="">
+          </div>
+          <span class="album-title"></span>
+          <span class="album-artist"></span>
+        </li>
+      </ul> -->
+
+<!--       <li>
+        
+        show the condition of there not being album information results in one or all areas when clicked
+      </li> -->
+
+
   </div>
 
   <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
